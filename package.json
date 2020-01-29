@@ -1,0 +1,23 @@
+{
+  "name": "vue-xstate",
+  "version": "1.0.0",
+  "description": "A simple plugin to make your XState state machines available in your Vue app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/f-elix/vue-xstate.git"
+  },
+  "keywords": [
+    "vue",
+    "xstate"
+  ],
+  "author": "Felix Guerin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/f-elix/vue-xstate/issues"
+  },
+  "homepage": "https://github.com/f-elix/vue-xstate#readme"
+}
