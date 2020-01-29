@@ -34,7 +34,7 @@ const generateVueMachine = machine => {
 	});
 };
 
-module.exports.VueStateMachine = {
+export const VueStateMachine = {
 	install(Vue, machines) {
 		machines.forEach(machine => {
 			const machineName = `$${machine.id}Machine`;
