@@ -52,7 +52,7 @@ You can now access them from any Vue component.
 
 The plugin takes care of interpreting and starting the machine.
 
-It exposes the current state, the context (which can be used as a global data store to replace Vuex or other state management libraries) and the `send()` method. It will also log state and context changes to the console when in development mode, as this makes it easier to debug.
+It exposes the current state, the context (which can be used as a global data store to replace Vuex or other state management libraries) and the `send()` method. It can also log state and context changes to the console (available in the options), as this makes it easier to debug.
 
 In order for your component to receive and react to a machine state or context change, you should put these in computed properties.
 
