@@ -26,7 +26,7 @@ const generateVueMachine = (machine, logState = false, logContext = false) => {
 		data() {
 			return {
 				current: machine.initialState,
-				context: machine.context,
+				context: machine.initialState.context,
 				service: interpret(machine)
 			};
 		},
