@@ -58,7 +58,7 @@ In order for your component to receive and react to a machine state or context c
 
 In app.vue (or any Vue single-file component) :
 
-```javascript
+```html
 <template>
     <button @click="onFetch" v-if="!fetchState.matches('fetching')">
       Fetch
@@ -116,11 +116,17 @@ Vue.use(VueStateMachine, {
 });
 ```
 
-### options
+### Options
 
 -   `machines` - Array : an array of state machines to be added on the Vue instance;
 -   `logState` - Boolean (default: false): when true, outputs the state value to the console on every state change;
 -   `logContext` - Boolean (default: false): when true, outputs the updated context to the console on every state change;
+
+### Usage with Nuxt.js
+
+If Nuxt is used in SPA mode, nothing different needs to be done, just follow the usual way of integrating 3rd party plugins in a Nuxt app.
+
+If Nuxt is used in Universal mode, the plugin needs to be transpiled. In your `nuxt.config.js` file, add `'vue-xstate-plugin'` to the `transpile` option.
 
 ## Contributions
 
