@@ -1,6 +1,6 @@
 {
 	"name": "vue-xstate-plugin",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "A simple plugin to make your XState state machines available in your Vue app.",
 	"main": "index.js",
 	"repository": {
