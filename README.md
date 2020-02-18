@@ -25,7 +25,7 @@ Configure an XState machine that you want to pass to your Vue app and export it.
 In fetchMachine.js :
 
 ```javascript
-import { Machine } from "xstate";
+import { Machine } from 'xstate';
 
 export const fetchMachine = Machine({
 	/* machine config... */
@@ -37,9 +37,9 @@ The plugin takes in an `options` object with a `machines` array, so you can inte
 In main.js :
 
 ```javascript
-import { VueStateMachine } from "vue-xstate-plugin";
-import { fetchMachine } from "./fetchMachine.js";
-import { anotherMachine } from "./anotherMachine.js";
+import { VueStateMachine } from 'vue-xstate-plugin';
+import { fetchMachine } from './fetchMachine.js';
+import { anotherMachine } from './anotherMachine.js';
 
 Vue.use(VueStateMachine, {
 	machines: [fetchMachine, anotherMachine]
@@ -94,8 +94,8 @@ If you have a lot of machines to integrate, it is a good idea to import them all
 fsm/index.js :
 
 ```javascript
-import { firstMachine } from "./firstMachine.js";
-import { secondMachine } from "./secondMachine.js";
+import { firstMachine } from './firstMachine.js';
+import { secondMachine } from './secondMachine.js';
 /* etc. */
 
 export const machines = [
@@ -108,8 +108,8 @@ export const machines = [
 main.js :
 
 ```javascript
-import { VueStateMachine } from "vue-xstate-plugin";
-import { machines } from "./fsm";
+import { VueStateMachine } from 'vue-xstate-plugin';
+import { machines } from './fsm';
 
 Vue.use(VueStateMachine, {
 	machines
@@ -119,8 +119,8 @@ Vue.use(VueStateMachine, {
 ### Options
 
 -   `machines` - Array : an array of state machines to be added on the Vue instance;
--   `logState` - Boolean (default: false): when true, outputs the state value to the console on every state change;
--   `logContext` - Boolean (default: false): when true, outputs the updated context to the console on every state change;
+-   `logState` - Boolean (default: false): when true, outputs the new state value to the console on every state change (disabled in production);
+-   `logContext` - Boolean (default: false): when true, outputs the updated context to the console on every state change (disabled in production);
 
 ### Usage with Nuxt.js
 

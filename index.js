@@ -1,5 +1,5 @@
-import Vue from "vue";
-import { interpret } from "xstate";
+import Vue from 'vue';
+import { interpret } from 'xstate';
 
 const generateVueMachine = (machine, logState = false, logContext = false) => {
 	return new Vue({
@@ -9,15 +9,21 @@ const generateVueMachine = (machine, logState = false, logContext = false) => {
 					if (state.changed) {
 						this.current = state;
 						this.context = state.context;
-						if (logState) {
-							console.log(
-								`%c [ ${machine.id.toUpperCase()} STATE ]`,
-								"color: #1989ac",
-								this.current.value
-							);
-						}
-						if (logContext) {
-							console.log(`%c [ ${machine.id.toUpperCase()} CONTEXT ]`, "color: #2b8528", this.context);
+						if (process.env.NODE_ENV === 'development') {
+							if (logState) {
+								console.log(
+									`%c [ ${machine.id.toUpperCase()} STATE ]`,
+									'color: #1989ac',
+									this.current.value
+								);
+							}
+							if (logContext) {
+								console.log(
+									`%c [ ${machine.id.toUpperCase()} CONTEXT ]`,
+									'color: #2b8528',
+									this.context
+								);
+							}
 						}
 					}
 				})
