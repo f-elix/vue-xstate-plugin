@@ -1,7 +1,19 @@
 import Vue from 'vue';
-import { interpret } from 'xstate';
+import { interpret, State } from 'xstate';
 
-const generateVueMachine = (machine, logState = false, logContext = false) => {
+const generateVueMachine = (machine, logState = false, logContext = false, persistState = false) => {
+	let storedStateName = null;
+	let storedState = null;
+	const storeState = window && window.localStorage && persistState;
+
+	if (storeState) {
+		storedStateName = `${machine.id} machine state - ${window.location.hostname}`;
+		storedState = JSON.parse(localStorage.getItem(storedStateName));
+	}
+
+	const startingState = State.create(storedState || machine.initialState);
+	const resolvedState = machine.resolveState(startingState);
+
 	return new Vue({
 		created() {
 			this.service
@@ -9,6 +21,15 @@ const generateVueMachine = (machine, logState = false, logContext = false) => {
 					if (state.changed) {
 						this.current = state;
 						this.context = state.context;
+
+						if (storeState) {
+							try {
+								localStorage.setItem(storedStateName, JSON.stringify(this.current));
+							} catch (err) {
+								console.error('Local storage is unavailable.');
+							}
+						}
+
 						if (process.env.NODE_ENV === 'development') {
 							if (logState) {
 								console.log(
@@ -27,12 +48,13 @@ const generateVueMachine = (machine, logState = false, logContext = false) => {
 						}
 					}
 				})
-				.start();
+				.start(resolvedState);
+			console.log(`${machine.id}Machine started`);
 		},
 		data() {
 			return {
-				current: machine.initialState,
-				context: machine.initialState.context,
+				current: resolvedState,
+				context: resolvedState.context,
 				service: interpret(machine)
 			};
 		},
@@ -45,11 +67,11 @@ const generateVueMachine = (machine, logState = false, logContext = false) => {
 };
 
 export const VueStateMachine = {
-	install(Vue, options) {
-		const { machines, logState, logContext } = options;
+	install(Vue, machines) {
 		machines.forEach(machine => {
-			const machineName = `$${machine.id}Machine`;
-			Vue.prototype[machineName] = generateVueMachine(machine, logState, logContext);
+			const { config, logState, logContext, persistState } = machine;
+			const machineName = `$${config.id}Machine`;
+			Vue.prototype[machineName] = generateVueMachine(config, logState, logContext, persistState);
 		});
 	}
 };

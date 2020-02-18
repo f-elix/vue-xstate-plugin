@@ -32,7 +32,7 @@ export const fetchMachine = Machine({
 });
 ```
 
-The plugin takes in an `options` object with a `machines` array, so you can integrate multiple machines in your app if needed.
+The plugin takes in an array of objects, each containing a `config` property representing your XState machine and options that you can configure. You can integrate as many machines as you need.
 
 In main.js :
 
@@ -41,14 +41,21 @@ import { VueStateMachine } from 'vue-xstate-plugin';
 import { fetchMachine } from './fetchMachine.js';
 import { anotherMachine } from './anotherMachine.js';
 
-Vue.use(VueStateMachine, {
-	machines: [fetchMachine, anotherMachine]
-});
+Vue.use(VueStateMachine, [
+	{
+		config: fetchMachine,
+		logState: true,
+		logContext: true,
+		persistState: true
+	},
+	{
+		config: anotherMachine,
+		persistState: true
+	}
+]);
 ```
 
-Now the plugin makes your machines available as `$machineNameMachine`.
-
-You can now access them from any Vue component.
+The plugin makes your machines available as `$machineNameMachine` and you can now access them from any Vue component.
 
 The plugin takes care of interpreting and starting the machine.
 
@@ -87,40 +94,11 @@ export default {
 
 You can now configure a machine with all the features that XState provides and use it as a reactive global store to manage your data and the state of your Vue app.
 
-### Multiple machines
-
-If you have a lot of machines to integrate, it is a good idea to import them all in an index file first.
-
-fsm/index.js :
-
-```javascript
-import { firstMachine } from './firstMachine.js';
-import { secondMachine } from './secondMachine.js';
-/* etc. */
-
-export const machines = [
-	firstMachine,
-	secondMachine
-	/* etc. */
-];
-```
-
-main.js :
-
-```javascript
-import { VueStateMachine } from 'vue-xstate-plugin';
-import { machines } from './fsm';
-
-Vue.use(VueStateMachine, {
-	machines
-});
-```
-
 ### Options
 
--   `machines` - Array : an array of state machines to be added on the Vue instance;
 -   `logState` - Boolean (default: false): when true, outputs the new state value to the console on every state change (disabled in production);
 -   `logContext` - Boolean (default: false): when true, outputs the updated context to the console on every state change (disabled in production);
+-   `persistState` - Boolean (default: false): when true, stores the current state of the machine in `localStorage` (if available) and retrieves it from there on subsequent page loads.
 
 ### Usage with Nuxt.js
 
