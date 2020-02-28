@@ -104,7 +104,19 @@ You can now configure a machine with all the features that XState provides and u
 
 If Nuxt is used in SPA mode, nothing different needs to be done, just follow the usual way of integrating 3rd party plugins in a Nuxt app.
 
-If Nuxt is used in Universal mode, the plugin needs to be transpiled. In your `nuxt.config.js` file, add `'vue-xstate-plugin'` to the `transpile` option.
+If Nuxt is used in Universal mode, the plugin needs to be transpiled. In your `nuxt.config.js` file, add `'vue-xstate-plugin'` to the `transpile` option. Create a plugin (for example, 'xstate.js' inside the plugins folder ), add the code from the main.js file example and register the plugin in the `nuxt.config.js` file. Make sure to specify that it should only run in the client side. The machine will be available after the application has mounted.
+
+Example:
+`nuxt.config.js:`
+```
+export default {
+    ...
+    plugins: [
+        { src: '~/plugins/xstate.js', mode: 'client' }
+    ]
+    ...
+}
+```
 
 ## Contributions
 
