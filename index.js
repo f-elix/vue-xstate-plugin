@@ -69,8 +69,9 @@ const generateVueMachine = (machine, logState = false, logContext = false, persi
 export const VueStateMachine = {
 	install(Vue, machines) {
 		machines.forEach(machine => {
-			const { config, logState, logContext, persistState } = machine;
-			const machineName = `$${config.id}Machine`;
+			const { config, machineSuffix = "Machine", logState, logContext, persistState } = machine;
+			const machineName = `$${config.id}${machineSuffix}`;
+			console.log(`${machineName}`)
 			Vue.prototype[machineName] = generateVueMachine(config, logState, logContext, persistState);
 		});
 	}
