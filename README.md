@@ -46,7 +46,8 @@ Vue.use(VueStateMachine, [
 		config: fetchMachine,
 		logState: true,
 		logContext: true,
-		persistState: true
+        persistState: true,
+        machineSuffix: ""
 	},
 	{
 		config: anotherMachine,
@@ -99,6 +100,7 @@ You can now configure a machine with all the features that XState provides and u
 -   `logState` - Boolean (default: false): when true, outputs the new state value to the console on every state change (disabled in production);
 -   `logContext` - Boolean (default: false): when true, outputs the updated context to the console on every state change (disabled in production);
 -   `persistState` - Boolean (default: false): when true, stores the current state of the machine in `localStorage` (if available) and retrieves it from there on subsequent page loads.
+-   `machineSuffix` - String (default: "Machine"): string appended to imported machine ID for reference in Vue app. For example, if you imported a machine with an ID of "fetch" you would access it as $fetchMachine (as seen in the above examples). If you passsed in "CoolMachine" to the machineSuffix config option you would access it as $fetchCoolMachine.
 
 ### Usage with Nuxt.js
 
