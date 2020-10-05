@@ -2,7 +2,7 @@
 
 A simple plugin to make your XState state machines available on the Vue instance.
 
-> NOTE: This plugin uses a VUe event bus, which is not compatible with Vue 3.x. If you need to use Xstate with Vue 3, you should use the [official @xstate/vue package](https://xstate.js.org/docs/packages/xstate-vue/).
+> NOTE: This plugin uses a Vue event bus, which has been deprecated in Vue 3.x. If you need to use Xstate with Vue 3, you should use the [official @xstate/vue package](https://xstate.js.org/docs/packages/xstate-vue/).
 
 ## Usage
 
